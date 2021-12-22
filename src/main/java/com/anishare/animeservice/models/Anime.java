@@ -22,6 +22,7 @@ public class Anime {
     private Date startingDate;
     private String status;
     private String ageRating;
+    private String slug;
     private int episodeCount;
 
 }

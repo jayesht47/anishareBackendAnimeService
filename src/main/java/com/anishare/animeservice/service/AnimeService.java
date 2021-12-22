@@ -33,7 +33,7 @@ public class AnimeService {
         HttpEntity<String> httpEntity = new HttpEntity<String>(headers);
 
         ResponseEntity<String> response = restTemplate.exchange("https://kitsu.io/api/edge/anime/" + animeId + "?fields[anime]=titles,synopsis,averageRating,posterImage," +
-                        "ageRating,status,startDate,episodeCount",
+                        "ageRating,status,startDate,episodeCount,slug",
                 HttpMethod.GET,httpEntity, String.class);
 
         try {
@@ -50,6 +50,7 @@ public class AnimeService {
             anime.setStatus(animeData.getJSONObject("data").getJSONObject("attributes").get("status").toString());
             anime.setEpisodeCount(Integer.parseInt(animeData.getJSONObject("data").getJSONObject("attributes").get("episodeCount").toString()));
             anime.setStartingDate(Date.valueOf(animeData.getJSONObject("data").getJSONObject("attributes").get("startDate").toString()));
+            anime.setSlug(animeData.getJSONObject("data").getJSONObject("attributes").get("slug").toString());
 
             //Saving poster images with various sizes
             PosterImage posterImage = new PosterImage();
